@@ -8,13 +8,9 @@
 
 ## Plan
 
-23.12.18 - 23.12.24
+23.12.18 - 23.01.21
 
-- [Programmers Beginners - 100 problems](https://school.programmers.co.kr/learn/challenges/beginner?order=acceptance_desc).
-
-23.12.25 - XX.XX.XX
-
-- [Greedy - 50 problems]()
+- [Greedy - 50 problems](https://www.acmicpc.net/workbook/view/4380)
 
 XX.XX.XX - XX.XX.XX
 
@@ -46,7 +42,7 @@ December, 2023
 |-|-|-|-|-|-|-|
 |-|-|-|-|-|-|-|
 |-|-|-|-|-|-|-|
-|18|19|20|21|22|23|24|
+|18|O|20|21|22|23|24|
 |25|26|27|28|29|30|31|
 
 January, 2024
