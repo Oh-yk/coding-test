@@ -10,7 +10,7 @@
 
 23.12.18 - 23.01.21
 
-- [Greedy - 50 problems](https://www.acmicpc.net/workbook/view/4380)
+- [Greedy](https://github.com/tony9402/baekjoon/tree/main/greedy)
 
 XX.XX.XX - XX.XX.XX
 
@@ -42,7 +42,7 @@ December, 2023
 |-|-|-|-|-|-|-|
 |-|-|-|-|-|-|-|
 |-|-|-|-|-|-|-|
-|18|O|20|21|22|23|24|
+|18|O|O|21|22|23|24|
 |25|26|27|28|29|30|31|
 
 January, 2024
