@@ -3,36 +3,60 @@ input = sys.stdin.readline
 
 from collections import deque
 
-M, N = map(int, input().split())
-
-box = []
+M, N = map(int, input().split()) # M: 가로, N: 세로
+m = []
 for _ in range(N):
-    row = list(map(int, input().split()))
-    box.append(row)
-    
-def is_done(box):
-    for row in box:
-        for apple in row:
-            if apple == 0:
-                return False
+    l = list(map(int, input().split()))
+    m.append(l)
+
+visited = [ [False] * M for _ in range(N)]
+queues = []
+for y in range(N):
+    for x in range(M):
+        if m[y][x] == 1:
+            visited[y][x] = True
+            queues.append(deque([(y, x)]))
+
+print(queues)
+def is_end():
+    for queue in queues:
+        if len(queue) != 0:
+            return False
     return True
 
-visited = [[False] * M for _ in range(N)]
+round = 0      
+while not is_end():
+    round += 1
+    print(round)
+    for queue in queues:
+        if len(queue) == 0:
+            continue
+        
+        y, x = queue.popleft()
+        dist = m[y][x]
+        
+        for dy, dx in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
+            ny = y + dy
+            nx = x + dx
+            if ny >= N or ny < 0 or nx >= M or nx < 0: # out of range
+                continue
+            if visited[ny][nx]:
+                continue
+            if m[ny][nx] == -1: # no way
+                continue
+            
+            m[ny][nx] = dist + 1
+            
+            visited[ny][nx] = True
+            queue.append((ny, nx))
 
-neighbors = [(0, 1), (1, 0), (-1, 0), (0, -1)]
+no = False
+for row in m:
+    if 0 in row:
+        no = True
+        print("-1")
+        break
 
-count = 1
-while not is_done(box):
-    for r in range(N):
-        for c in range(M):
-            if box[r][c] == count:
-                for dr, dc in neighbors:
-                    new_r = r + dr
-                    new_c = c + dc
-                    if new_r >= N or new_r < 0 or new_c >= M or new_c < 0:
-                        continue
-                    if box[new_r][new_c] == 0:
-                        box[new_r][new_c] = count + 1
-    count += 1
-    
-print(count - 1)
+if not no:
+    max_value = max([max(row) for row in m])
+    print(max_value - 1)
