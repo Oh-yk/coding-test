@@ -24,7 +24,7 @@ while True:
             level.append(line)
             if "S" in line:
                 c = line.index("S")
-                start_idx = [l, r, c, 0]
+                start_idx = [l, r, c]
             elif "E" in line:
                 c = line.index("E")
                 end_idx = [l, r, c]
@@ -35,40 +35,46 @@ while True:
     visited = [[[False] * C for _ in range(R)] for _ in range(L)]
     visited[start_idx[0]][start_idx[1]][start_idx[2]] = True
     
-    
+    # print(m)
+    # print(start_idx)
+    # print(end_idx)
     queue = deque([start_idx])
+    next_queue = deque()
     
-    dist = start_idx[3]
+    dist = 1
     found = False
-    
-    while queue:
-        p_curr = queue.popleft()
-
-        dist = p_curr[3] + 1
-        for dl, dr, dc in move:
-            p_next = [p_curr[0] + dl, p_curr[1] + dr, p_curr[2] + dc]
-            
-            if p_next[0] < 0 or p_next[0] >= L or p_next[1] < 0 or p_next[1] >= R or p_next[2] < 0 or p_next[2] >= C:
-                continue
-            
-            if visited[p_next[0]][p_next[1]][p_next[2]]:
-                continue
-            
-            if m[p_next[0]][p_next[1]][p_next[2]] == OBSTACLE:
-                continue
-                
-            if p_next == end_idx:
-                found = True
+    while True:
+        while queue:
+            if found:
                 break
+            p_curr = queue.popleft()
+            for dl, dr, dc in move:
+                p_next = p_curr[0] + dl, p_curr[1] + dr, p_curr[2] + dc
+                
+                if p_next[0] < 0 or p_next[0] >= L or p_next[1] < 0 or p_next[1] >= R or p_next[2] < 0 or p_next[2] >= C:
+                    continue
+                
+                if visited[p_next[0]][p_next[1]][p_next[2]]:
+                    continue
+                
+                if m[p_next[0]][p_next[1]][p_next[2]] == OBSTACLE:
+                    continue
+                    
+                if p_next == end_idx:
+                    found = True
+                    break
+                    
+                visited[p_next[0]][p_next[1]][p_next[2]] = True
+                next_queue.append(p_next)
         
-            
-            visited[p_next[0]][p_next[1]][p_next[2]] = True
-            p_next.append(dist)
-            queue.append(p_next)
-            
         if found:
             break
-
+        queue = next_queue
+        next_queue = deque()
+        dist += 1
+        
+        if not queue:
+            break
         
     if not found:
         print("Trapped!")
