@@ -11,3 +11,9 @@ def call_by_val(l):
     l = 3
 call_by_val(a)
 print(a)
+
+a = [1, 2, 3]
+b = a
+b[0] = 2
+print(b)
+print(a)
